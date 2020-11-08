@@ -10,35 +10,56 @@ package jogoscartas;
  * @author user
  */
 public class cartas {
-    public static int copas = 4;
-    public static int espadas = 3;
-    public static int ouros= 2;
-    public static int paus = 1;
+    public static final int AS = 1;
+    public static final int PAUS = 1;
+    public static final int OUROS= 2;
+    public static final int ESPADAS = 3;
+    public static final int COPAS = 4;
+    public static final int VALETE = 11;
+    public static final int DAMA = 12;
+    public static final int REI = 13;
     private final int naipes;
     private final int valores;
     
- public cartas(int n, int v) {
-   if (n >= paus && n <= copas)
-     naipes = n;
-   else
-     naipes = 1;
-   if (v >= 1 && n <= 13)
-     valores = v;
-   else
-     valores = 1;
- }
- public int getNaipes() {
+    public cartas(int valores, int naipes) {
+    this.valores =valores;
+    this.naipes = naipes;
+  }
+    public int getNaipes() {
    return naipes;
  }
- public int getValores() {
+    public int getValores() {
    return valores;
  }
+    public static int menorValor() {
+      return AS;
+  }
+    public static int maiorValor() {
+      return REI;
+  }
+    public static int primeiroNaipe() {
+      return PAUS;
+  }
+    public static int ultimoNaipe() {
+      return COPAS;
+  }
+ 
+   public int compareTo(cartas outra) {
+      return getValores() - outra.getValores();
+  }
+
+  public boolean equals(Object objeto) {
+      if(! (objeto instanceof cartas)) {
+          return false;
+      }
+     cartas outra = (cartas)objeto;
+      return getValores() == outra.getValores()
+              && getNaipes() == outra.getNaipes();
+  }
 
     /**
      *
      * @return
-     */
- 
     @Override
  public String toString() {
       String v1 = "";
@@ -49,45 +70,16 @@ public class cartas {
          String n1 = "as"; 
      }
   **/ 
-   switch(valores) {
-     case 1:  v1 = "às";
-        break;
-     case 2:  v1 = "dois";  
-        break;
-     case 3:  v1 = "tres";  
-        break;
-     case 4:  v1 = "quatro"; 
-        break;
-     case 5:  v1 = "cinco"; 
-        break;
-     case 6:  v1 = "seis";  
-        break;
-     case 7:  v1 = "sete";   
-        break;
-     case 8:  v1 = "oito";  
-        break;
-     case 9:  v1 = "nove";   
-        break;
-     case 10: v1 = "dez";    
-        break;
-     case 11: v1 = "valete"; 
-        break;
-     case 12: v1 = "dama";   
-        break;
-     case 13: v1 = "rei";   
-        break;
+     
+     protected static final String[] nomeDeCarta = {
+    "","AS","DOIS","TRES","QUATRO","CINCO","SEIS","SETE","OITO","NOVE","DEZ","VALETE","DAMA","REI",};
 
-  }
-   switch(naipes) {
-     case 1: v1 = "de paus";  
-        break;
-     case 2:   v1 = "de ouros"; 
-        break;
-     case 3: v1 = "de espadas"; 
-        break;
-     case 4:   v1 = "de copas";   
-        break;
-   }
-  return v1;
+  protected static final String[] nomeDeNaipe = {
+    "PAUS","OUROS","COPAS", "ESPADAS"};
+     
+    @Override
+     public String toString() {
+    return nomeDeCarta[getValores()] + " de " + nomeDeNaipe[getNaipes()];
+  }    
  }
- }
+ 
