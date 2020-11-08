@@ -16,6 +16,7 @@ public class JogosCartas {
      */
     public static void main(String[] args) {
          
-      System.out.println(v1.toString());
+        baralho b1 = new baralho();
     }
 }
+
